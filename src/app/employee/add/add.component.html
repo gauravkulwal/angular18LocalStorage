@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form action="" [formGroup]="employeeService.empForm">
+                <div class="form-group">
+                    <label for="">FullName:</label>
+                    <input type="text" [ngClass]="{'is-invalid':f['fullName'].invalid && f['fullName'].touched}" class="form-control"  formControlName="fullName" placeholder="fullName">
+                @if( f['fullName'].invalid && f['fullName'].touched){
+<small>FullName is mandatory ..</small>
+                }
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+<label for="">Gender:</label>
+<input type="radio" name="gender" id="" class="ms-2" value="Male" formControlName="gender">
+<label for="">Male</label>
+<input type="radio" name="gender" id="" class="ms-2" value="Female" formControlName="gender">
+<label for="">Female</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="checkbox" name="" id="" formControlName="isPermanent">
+                        <label for="">Is Permanent?</label>
+                      
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="">Contact:</label>
+                        <input type="text" [ngClass]="{'is-invalid':f['contact'].errors && f['contact'].touched}" class="form-control" formControlName="contact" placeholder="contact number">
+                   @if( f['contact'].errors && f['contact'].touched){
+                       @if(f['contact'].errors['required']){
+<small>Contact number is mandatory..</small>
+                       }
+                       @if(f['contact'].errors['minlength']){
+                        <small>not less than 10 digit.</small>
+                       }
+                        @if(f['contact'].errors['maxlength']){
+                            <small>not greater than 10 digit</small>
+                                                   }                      }
+                   
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Email:</label>
+                            <input type="email" [ngClass]="{'is-invalid': f['email'].errors && f['email'].touched}" class="form-control" formControlName="email" placeholder="your email address">
+                      @if( f['email'].errors && f['email'].touched){
+
+@if( f['email'].errors['required']){
+<small>Email is mandatory...</small>
+}
+@if( f['email'].errors['email']){
+    <small>Please provide a valid email address</small>
+}
+
+                      }
+
+                        </div>
+
+                     
+                    </div>
+                </div>
+<div class="row">
+    <div class="col-md-6">
+        <label for="">
+            Date of Joining:
+        </label>
+        <input type="date" name="" id="" formControlName="dateOfJoining" class="form-control" placeholder="date">
+    </div>
+    <div class="col-md-6">
+       
+        <label for="">Department</label>
+        <select formControlName="department"  class="form-control" >
+            <option value=''>Select Deprtment</option>
+        @for( dept of departments ; track  $index){
+<option value="{{dept}}">{{dept}}</option>
+        }
+    </select>
+    </div>
+</div>
+<div class="">
+    <button type="submit"  (click)="addEmployee()" *ngIf="employeeService.empForm.value['id'] == 0" [disabled]="employeeService.empForm.invalid" class="btn btn-sm  form-control mt-3">Submit</button>
+    <button type="submit" *ngIf="employeeService.empForm.value['id'] != 0" [disabled]="employeeService.empForm.invalid" (click)="updateEmployee()" class="btn btn-sm  form-control mt-3">Update</button>
+</div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

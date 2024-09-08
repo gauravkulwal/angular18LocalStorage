@@ -1,0 +1,34 @@
+<div class="container">
+    <table class="table mx-auto table-striped">
+        <thead >
+            <th>S.N</th>
+            <th>FullName</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>DateOfJoining</th>
+            <th>Permanent</th>
+            <th>Department</th>
+            <th></th>
+        </thead>
+        @for(emp of employeeService.employeeList; track emp){
+<tr>
+    <td>{{$index+1}}</td>
+    <td>{{emp.fullName}}</td>
+    <td>{{emp.gender}}</td>
+    <td>{{emp.email}}</td>
+    <td>{{emp.contact}}</td>
+    <td>{{emp.dateOfJoining}}</td>
+    <td>{{emp.isPermanent}}</td>
+    <td>{{emp.department}}</td>
+    <td>
+       <i  (click)="onEdit(emp)" class="bi bi-pencil-square"></i>
+       <i (click)="onDelete(emp)" class="bi bi-x-square"></i>
+    </td>
+</tr>
+        }
+        @empty {
+            no data
+        }
+    </table>
+</div>
